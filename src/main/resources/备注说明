@@ -1,0 +1,19 @@
+1、ik分词器和es版本要一致 本代码使用7.9.0
+2、本代码中 是需要预先初始化ES的 文本抽取管道 attachment插件
+PUT /_ingest/pipeline/attachment
+{
+    "description": "Extract attachment information",
+    "processors": [
+        {
+            "attachment": {
+                "field": "content",
+                "ignore_missing": true
+            }
+        },
+        {
+            "remove": {
+                "field": "content"
+            }
+        }
+    ]
+}
